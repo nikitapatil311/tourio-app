@@ -1,17 +1,48 @@
-import { places } from '../../../../lib/db.js';
+import Place from "../../../../db/models/places.js";
+import dbConnect from "../../../../db/connect";
 
-export default function handler(request, response) {
-  const { id } = request.query;
+export default async function handler(request, response) {
+    console.log("connecting to the db");
+    //connect to the db
+    await dbConnect();
+    // collect data from client
+    const method = request.method;
+    console.log(method);
+    const { id } = request.query;
 
-  if (!id) {
-    return;
-  }
+    if (!id) {
+        return;
+    }
+    switch (method) {
+        // when reading the data
+        case "GET":
+            console.log("starting to get the data");
 
-  const place = places.find((place) => place.id === id);
+            const places = await Place.findById(id);
 
-  if (!place) {
-    return response.status(404).json({ status: 'Not found' });
-  }
+            if (places) {
+                return response.status(200).json(places);
+            } else {
+                return response
+                    .status(400)
+                    .json({ status: "No data was found" });
+            }
+            break;
+        // when updating data‚
+        case "PATCH":
+            console.log("updating");
+            break;
+        // when deleting data‚
+        case "DELETE":
+            console.log("deleting");
+            break;
+    }
 
-  response.status(200).json(place);
+    const place = places.find((place) => place.id === id);
+
+    if (!place) {
+        return response.status(404).json({ status: "Not found" });
+    }
+
+    response.status(200).json(place);
 }
