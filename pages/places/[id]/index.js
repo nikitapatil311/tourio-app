@@ -37,8 +37,14 @@ export default function DetailsPage() {
 
     if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-    function deletePlace() {
-        console.log("deleted?");
+    async function deletePlace() {
+        console.log("deleting..,");
+        const response = await fetch(`/api/places/${id}`, {
+            method: "DELETE",
+        });
+        router.push("/");
+
+        console.log("deleted ,");
     }
 
     return (
@@ -69,7 +75,13 @@ export default function DetailsPage() {
                     <StyledLink>Edit</StyledLink>
                 </Link>
                 <StyledButton
-                    onClick={deletePlace}
+                    onClick={
+                        // confirm(`do you really want to delete ${place.name}`) &&
+                        // confirm(
+                        //     `REALLY?!? Because then you can kiss ${place.name} good by `
+                        // ) &&
+                        deletePlace
+                    }
                     type="button"
                     variant="delete"
                 >
