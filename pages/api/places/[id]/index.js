@@ -31,6 +31,17 @@ export default async function handler(request, response) {
         // when updating data‚
         case "PATCH":
             console.log("updating");
+            const pla = await Place.findByIdAndUpdate(id, {
+                $set: request.body,
+            });
+
+            if (pla) {
+                return response.status(200).json({ status: `Place updated` });
+            } else {
+                return response
+                    .status(400)
+                    .json({ status: "No data was found" });
+            }
             break;
         // when deleting data‚
         case "DELETE":
