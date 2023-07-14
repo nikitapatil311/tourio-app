@@ -24,8 +24,8 @@ const Label = styled.label`
     font-weight: bold;
 `;
 
-export default function Form({ onSubmit, formName, defaultData }) {
-    function handleSubmit(event) {
+export default function Form({ onSubmit, formName, defaultData, id }) {
+    function handleSubmitAdd(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
         console.log(formData);
@@ -34,8 +34,26 @@ export default function Form({ onSubmit, formName, defaultData }) {
         onSubmit(data);
     }
 
+    function handleSubmitUpdate(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log(formData);
+        const data = {};
+
+        for (let [key, value] of formData.entries()) {
+            if (value) {
+                data[key] = value;
+            }
+        }
+        console.log(data);
+        onSubmit(data, id);
+    }
+
     return (
-        <FormContainer aria-labelledby={formName} onSubmit={handleSubmit}>
+        <FormContainer
+            aria-labelledby={formName}
+            onSubmit={defaultData ? handleSubmitUpdate : handleSubmitAdd}
+        >
             <Label htmlFor="name">Name</Label>
             <Input
                 id="name"
