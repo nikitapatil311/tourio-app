@@ -45,15 +45,23 @@ export default async function handler(request, response) {
             break;
         // when deleting data‚
         case "DELETE":
-            console.log("deleting");
+            console.log("deleting from DB");
+            const delPlace = await Place.findByIdAndDelete(id);
+            if (delPlace) {
+                return response.status(200).json({ status: `Place deleted` });
+            } else {
+                return response
+                    .status(400)
+                    .json({ status: "No data was found to be deleted " });
+            }
             break;
+        default:
+            const place = places.find((place) => place.id === id);
+
+            if (!place) {
+                return response.status(404).json({ status: "Not found" });
+            }
+
+            return response.status(200).json(place);
     }
-
-    const place = places.find((place) => place.id === id);
-
-    if (!place) {
-        return response.status(404).json({ status: "Not found" });
-    }
-
-    response.status(200).json(place);
 }
