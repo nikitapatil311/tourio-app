@@ -18,7 +18,7 @@ Tourio App is designed to provide a user-friendly interface for managing travel 
 
 ## Getting Started
 
-Visit the deployed Tourio App at [https://tourio-app-theta.vercel.app/](https://tourio-app-theta.vercel.app/) to experience its capabilities firsthand. You can perform the following actions:
+Visit the deployed Tourio App at [Link to the Tourio App](https://tourio-app-theta.vercel.app/) to experience its capabilities firsthand. You can perform the following actions:
 
 1. **View Places:** Explore the pre-existing places and their details on the app's homepage.
 
@@ -30,7 +30,7 @@ Visit the deployed Tourio App at [https://tourio-app-theta.vercel.app/](https://
 
 ## Deployment
 
-Tourio App is live and accessible at [https://tourio-app-theta.vercel.app/](https://tourio-app-theta.vercel.app/). You can enjoy its features directly from your web browser.
+Tourio App is live and accessible at [Link to the Tourio App](https://tourio-app-theta.vercel.app/). You can enjoy its features directly from your web browser.
 
 ## Contributing
 
